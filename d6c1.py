@@ -56,5 +56,38 @@ for i in range(maxy+1):
 		line += '.' if M[i][j] == None else str(M[i][j])
 	print(line)
 
+infinite_points = []
+for point in points:
+	for i in range(maxy+1):
+		if point[0] in infinite_points:
+			break
+		if M[i][0] == point[0] and point[0] is not None:
+			infinite_points.append(point[0])
+		if M[i][maxx] == point[0] and point[0] is not None:
+			infinite_points.append(point[0])
+	for i in range(maxx+1):
+		if point[0] in infinite_points:
+			break
+		if M[0][i] == point[0] and point[0] is not None:
+			infinite_points.append(point[0])
+		if M[maxy][i] == point[0] and point[0] is not None:
+			infinite_points.append(point[0])
 
+finite_points = []
+for point in points:
+	if point[0] not in infinite_points:
+		finite_points.append(point[0])
+
+max_finite_area = 0
+for point in finite_points:
+	counter = 0
+	for i in range(maxy+1):
+		for j in range(maxx+1):
+			if M[i][j] == point:
+				counter += 1
+	max_finite_area = max(max_finite_area, counter)
+
+print(infinite_points)
+print(finite_points)
+print(max_finite_area)
 				
